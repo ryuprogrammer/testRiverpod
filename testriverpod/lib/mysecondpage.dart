@@ -25,7 +25,7 @@ class MySecondPage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('前のページaaa'),
+              child: const Text('前のページ'),
             ),
           ],
         ),
