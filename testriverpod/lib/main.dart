@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:testriverpod/myhomepage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// プロバイダの定義
+/// シンプルに状態を管理することができるStateProviderを定義
+final countProvider = StateProvider((ref) => 0);
+
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }

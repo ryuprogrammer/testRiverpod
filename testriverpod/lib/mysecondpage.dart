@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:testriverpod/main.dart';
 
-class MySecondPage extends StatelessWidget {
-  const MySecondPage({Key? key}) : super(key: key);
-
+// 値の参照方法
+/// プロバイダを利用する
+/// ↓
+/// ConsumerWidgetを継承したWidgetを使用する！
+class MySecondPage extends ConsumerWidget {
+  const MySecondPage({super.key});
   @override
-  Widget build(BuildContext context) {
+  // WidgetRefクラスのオブジェクトを取得
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -18,7 +24,7 @@ class MySecondPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text('ボタンを押した回数'),
-                Text('ここに回数を表示'),
+                Text('${ref.watch(countProvider)}'),
               ],
             ),
             ElevatedButton(
@@ -31,8 +37,10 @@ class MySecondPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Text('ボタン'),
+        onPressed: () {
+          ref.read(countProvider.notifier).state--;
+        },
+        child: const Text('マイナスボタン'),
       ),
     );
   }

@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:testriverpod/main.dart';
 import 'package:testriverpod/mysecondpage.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
+// 値の参照方法
+/// プロバイダを利用するには、WidgetRefクラスのオブジェクトを取得する
+/// ConsumerWidgetを継承したWidgetにて使用
+class MyHomePage extends ConsumerWidget {
+  const MyHomePage({super.key});
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -26,7 +23,8 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text('ボタンを押した回数'),
-                Text('$_counter'),
+                // プロバイダを参照
+                Text('${ref.watch(countProvider)}'),
               ],
             ),
             ElevatedButton(
@@ -44,9 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            _counter++;
-          });
+          // 値を監視: 変更されるたびにWidgetを書き換えてくれる
+          ref.read(countProvider.notifier).state++;
         },
         child: const Icon(Icons.add),
       ),
