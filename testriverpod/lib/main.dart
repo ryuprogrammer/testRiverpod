@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:testriverpod/myhomepage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// git の草テスト
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
